@@ -8,7 +8,7 @@ You get 10 attempts to guess the secret code, consisting of four digits.
 ## build the docker image by running <br>
 docker build -t <naam van de docker image> .  < ----- de "." geef aan dat je in de map staat waar de Dockerfile zich bevindt
 
-## start the game in a docker container by running <br>
+## create docker container met het gebruik van de docker image.  <br>
 docker run --name <naam voor de continer> -dt --mount type=bind,src="PATH TO YOUR LOCAL MAP(waar je mastermind bestanden staan)",dst=/usr/games/mastermind <naam van de docker image>
 
 ## execute the game in the container by running <br>
@@ -22,7 +22,7 @@ on the commandline
 
 
 
-## alleeen voor 3li4n en als voorbeeld <br>
+## alleen voor 3li4n en als voorbeeld. <br>
 docker run --name mastermind_python -dt --mount type=bind,src="/devops/p4",dst=/usr/games/mastermind python_ubuntu
 
 docker exec -it mastermind_python /bin/bash/usr/games
