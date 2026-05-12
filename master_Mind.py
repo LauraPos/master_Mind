@@ -4,7 +4,9 @@
 # v1.01
 # 15-8-2024
 # Last mod by DevJan : added loop for replay
-print("MasterMind")
+print("==================")
+print("=== MasterMind ===")
+print("==================")
 
 import random
 
@@ -44,7 +46,7 @@ def play_Mastermind():
             valid_Guess = len(guess) == 4 and all(c in "123456" for c in guess)
             if not valid_Guess:
                 print("Invalid input. Enter 4 digits, each from 1 to 6.")
-            show_Secret(secret_Code) if guess == "cheat" else False
+            # show_Secret(secret_Code) if guess == "cheat" else False
 
         black, white = get_Feedback(secret_Code, guess)
         print(f"Black pegs (correct position): {black}, White pegs (wrong position): {white}")
