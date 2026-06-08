@@ -4,14 +4,55 @@
 # v1.01
 # 15-8-2024
 # Last mod by DevJan : added loop for replay
-print("==================")
-print("=== MasterMind ===")
-print("==================")
+print("")
+print("")
+print("                              ==================")
+print("                              === MasterMind ===")
+print("                              ==================")
 
 import random
 
-def generate_Code(length=4, digits=6):
-    return [str(random.randint(1, digits)) for _ in range(length)]
+def generate_Code(length=4):
+    colors = ['Red', 'Green', 'Blue', 'Yellow', 'Purple', 'Orange']
+     
+    return [random.choice(colors) for _ in range(length)]
+    
+def return_Code():
+    secret_Code = generate_Code()
+    return secret_Code
+
+def adminLogin():
+    password = "admin123"
+    attempts = 5
+    while attempts > 0:
+        print("")
+        print("")
+        entered_Password = input("================== Enter admin password to view the secret code: =============")
+        if entered_Password == password:
+            return True
+        else:
+            attempts -= 1
+            print("")
+            print(f"Incorrect password. {attempts} attempts remaining.")
+    return False
+
+def login():
+        if adminLogin():
+            print("")
+            print("")
+            print("===========  Admin access granted. Starting game with admin access. =============")
+            print(return_Code())
+            return True
+        else:
+                print("")
+                print("")
+                print("===========  Admin access denied. Starting game without admin access. =============")
+                return True
+
+            
+        
+        
+        
 
 def get_Feedback(secret, guess):
     black_Pegs = sum(s == g for s, g in zip(secret, guess))
@@ -33,9 +74,17 @@ def show_Secret(mystery):
     print(mystery)
 
 def play_Mastermind():
+    
+    
+    print("")
+    print("")   
     print("Welcome to Mastermind!")
-    print("Guess the 4-digit code. Each digit is from 1 to 6. You have 10 attempts.")
-    secret_Code = generate_Code()
+    print("")
+    print("")
+    print("Guess the 4-Color code. you can Choose between ['Red', 'Green', 'Blue', 'Yellow', 'Purple', 'Orange']. You have 10 attempts.")
+    print("")
+    print("")
+    secret_Code = return_Code()
     attempts = 10
 
     for attempt in range(1, attempts + 1):
@@ -46,7 +95,7 @@ def play_Mastermind():
             valid_Guess = len(guess) == 4 and all(c in "123456" for c in guess)
             if not valid_Guess:
                 print("Invalid input. Enter 4 digits, each from 1 to 6.")
-            # show_Secret(secret_Code) if guess == "cheat" else False
+
 
         black, white = get_Feedback(secret_Code, guess)
         print(f"Black pegs (correct position): {black}, White pegs (wrong position): {white}")
@@ -60,6 +109,13 @@ def play_Mastermind():
 if __name__ == "__main__":
     again = 'Y'
     while again == 'Y' :
-        play_Mastermind()
-        again  = input (f"Play again (Y/N) ?").upper()
+        print("")
+        print("")
+        if input("Do you want to login as admin to view the secret code ? (Y/N) ").upper() == 'Y':
+            login()
+            play_Mastermind()
+            
+        else:
+            play_Mastermind()
+    again  = input (f"Play again (Y/N) ?").upper()
 
